@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pacific Law Academy — PU BA.LLB 2026 Study Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1B2A4A;
+  --navy-deep: #0f1e35;
+  --navy-mid: #162038;
+  --navy-light: #243558;
+  --gold: #C8922A;
+  --gold-light: #e0aa4a;
+  --gold-dim: rgba(200,146,42,0.18);
+  --gold-line: rgba(200,146,42,0.3);
+  --cream: #f5ead8;
+  --text: #e8dcc8;
+  --muted: #8a9db8;
+  --border: rgba(200,146,42,0.2);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--navy-deep);
+  color: var(--text);
+  font-family: 'Syne', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── NOISE OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── TOPBAR ── */
+.topbar {
+  position: relative;
+  z-index: 10;
+  background: var(--navy-deep);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.topbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.topbar-seal {
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid var(--gold-line);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.topbar-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cream);
+  line-height: 1.1;
+}
+
+.topbar-name span {
+  display: block;
+  font-size: 9px;
+  font-weight: 400;
+  color: var(--muted);
+  letter-spacing: 0.2em;
+  margin-top: 2px;
+}
+
+.topbar-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-align: right;
+}
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  z-index: 1;
+  padding: 100px 48px 80px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 700px;
+  height: 500px;
+  background: radial-gradient(ellipse, rgba(200,146,42,0.1) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 28px;
+  animation: riseIn 0.7s ease both;
+}
+
+.hero-eyebrow::before,
+.hero-eyebrow::after {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--gold-line);
+}
+
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--cream);
+  margin-bottom: 8px;
+  animation: riseIn 0.7s 0.08s ease both;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--gold-light);
+}
+
+.hero-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  font-style: italic;
+  color: var(--muted);
+  margin-bottom: 40px;
+  animation: riseIn 0.7s 0.14s ease both;
+}
+
+.hero-stats {
+  display: inline-flex;
+  gap: 0;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  animation: riseIn 0.7s 0.2s ease both;
+}
+
+.stat {
+  padding: 14px 28px;
+  border-right: 1px solid var(--border);
+  text-align: center;
+}
+
+.stat:last-child { border-right: none; }
+
+.stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--gold-light);
+  line-height: 1;
+}
+
+.stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* ── DIVIDER ── */
+.section-divider {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 0 48px;
+  margin: 0 0 40px;
+}
+
+.section-divider::before,
+.section-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.section-divider-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  white-space: nowrap;
+}
+
+/* ── GRID ── */
+.resource-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin: 0 48px 64px;
+  animation: riseIn 0.7s 0.3s ease both;
+}
+
+/* ── CARD BASE ── */
+.rcard {
+  background: var(--navy-deep);
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  padding: 36px 32px 28px;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.2s ease;
+}
+
+.rcard:hover { background: var(--navy-mid); }
+
+.rcard::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--gold-light);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.rcard:hover::after { transform: scaleX(1); }
+
+.rcard-ghost-num {
+  position: absolute;
+  bottom: -10px; right: 12px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 7rem;
+  font-weight: 700;
+  color: rgba(200,146,42,0.05);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  transition: color 0.3s ease;
+}
+
+.rcard:hover .rcard-ghost-num { color: rgba(200,146,42,0.09); }
+
+/* ── CARD SIZES ── */
+.rcard.span-4  { grid-column: span 4; }
+.rcard.span-6  { grid-column: span 6; }
+.rcard.span-8  { grid-column: span 8; }
+.rcard.span-12 { grid-column: span 12; }
+
+/* ── CARD PARTS ── */
+.rcard-category {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rcard-category::before {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 1px;
+  background: var(--gold-line);
+}
+
+.rcard-icon { font-size: 2rem; margin-bottom: 14px; }
+
+.rcard-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--cream);
+  margin-bottom: 10px;
+}
+
+.rcard-desc {
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--muted);
+  flex: 1;
+  margin-bottom: 24px;
+}
+
+.rcard-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+
+.rcard-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+
+.rcard-cta {
+  font-family: 'Syne', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: gap 0.2s ease;
+}
+
+.rcard:hover .rcard-cta { gap: 14px; }
+.rcard-cta::after { content: '→'; }
+
+/* ── WIDE CARD VARIANT ── */
+.rcard.wide-layout {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.rcard.wide-layout .rcard-left {
+  flex: 1;
+}
+
+.rcard.wide-layout .rcard-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+/* ── SECTION 2: CLASS TESTS ── */
+.test-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin: 0 48px 64px;
+  animation: riseIn 0.7s 0.4s ease both;
+}
+
+/* ── COMING SOON CARD ── */
+.rcard.coming-soon {
+  opacity: 0.4;
+  cursor: default;
+  pointer-events: none;
+}
+
+.rcard.coming-soon::after { display: none; }
+
+.coming-badge {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 7px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background: rgba(200,146,42,0.12);
+  border: 1px solid var(--border);
+  color: var(--gold);
+  padding: 2px 7px;
+  margin-bottom: 12px;
+}
+
+/* ── FOOTER ── */
+.site-footer {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid var(--border);
+  padding: 32px 48px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 24px;
+}
+
+.footer-left {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.footer-center {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--gold-light);
+  text-align: center;
+  opacity: 0.6;
+}
+
+.footer-right {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: right;
+  line-height: 1.8;
+}
+
+/* ── AASHI STRIP ── */
+.aashi-strip {
+  position: relative;
+  z-index: 1;
+  margin: 0 48px 40px;
+  border: 1px solid var(--border);
+  background: linear-gradient(135deg, var(--navy-mid), var(--navy-deep));
+  padding: 24px 36px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  overflow: hidden;
+  animation: riseIn 0.7s 0.45s ease both;
+}
+
+.aashi-strip::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 3px;
+  background: var(--gold-light);
+}
+
+.aashi-quote-mark {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 4rem;
+  font-weight: 700;
+  color: var(--gold-dim);
+  line-height: 0.8;
+  flex-shrink: 0;
+  margin-top: -8px;
+}
+
+.aashi-content { flex: 1; }
+
+.aashi-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
+  font-style: italic;
+  color: var(--text);
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.aashi-attr {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* ── ANIMATIONS ── */
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .topbar { padding: 12px 24px; }
+  .hero { padding: 60px 24px 50px; }
+  .hero-stats { flex-wrap: wrap; }
+  .section-divider { padding: 0 24px; }
+  .resource-grid { margin: 0 24px 48px; grid-template-columns: 1fr; }
+  .rcard.span-4,
+  .rcard.span-6,
+  .rcard.span-8,
+  .rcard.span-12 { grid-column: span 1; }
+  .rcard.wide-layout { flex-direction: column; gap: 0; }
+  .test-grid { margin: 0 24px 48px; grid-template-columns: 1fr; }
+  .aashi-strip { margin: 0 24px 32px; }
+  .site-footer { padding: 24px; grid-template-columns: 1fr; gap: 12px; }
+  .footer-right { text-align: left; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-brand">
+    <div class="topbar-seal">⚖️</div>
+    <div class="topbar-name">
+      Pacific Law Academy
+      <span>Sector 20 · Panchkula · Haryana</span>
+    </div>
+  </div>
+  <div class="topbar-meta">
+    PU BA.LLB 2026<br>
+    Study Resource Hub
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">Pattern-analysed · 3 Years of Previous Papers</div>
+  <h1>PU BA.LLB<br><em>2026</em></h1>
+  <p class="hero-sub">Complete study resource suite — flash cards, one-liners, class tests &amp; more</p>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">6+</div>
+      <div class="stat-label">Modules</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">500+</div>
+      <div class="stat-label">MCQs</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">200+</div>
+      <div class="stat-label">Flash Cards</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">2026</div>
+      <div class="stat-label">Exam Cycle</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: REFERENCE TOOLS -->
+<div class="section-divider">
+  <span class="section-divider-label">Reference Tools</span>
+</div>
+
+<div class="resource-grid">
+
+  <!-- Flash Cards Hub — WIDE -->
+  <a class="rcard span-8 wide-layout" href="flashcards/index.html">
+    <div class="rcard-left">
+      <div class="rcard-category">Flash Cards</div>
+      <div class="rcard-icon">🃏</div>
+      <div class="rcard-title">Law Flash Cards Hub</div>
+      <div class="rcard-desc">Interactive flip cards across four topic sets — Constitutional Appointments 2025–26, PLA Master Flash Cards, Constitution 50-Card Set, and Latin Legal Maxims. Click any card to reveal the answer.</div>
+      <div class="rcard-tags">
+        <span class="rcard-tag">Appointments</span>
+        <span class="rcard-tag">Constitution</span>
+        <span class="rcard-tag">Legal Maxims</span>
+        <span class="rcard-tag">Master Deck</span>
+      </div>
+      <div class="rcard-cta">Open Hub</div>
+    </div>
+    <div class="rcard-right">
+      <div class="rcard-ghost-num" style="position:relative; bottom:auto; right:auto; font-size:5rem; opacity:1; color:rgba(200,146,42,0.06);">4<br>decks</div>
+    </div>
+  </a>
+
+  <!-- Constitution Reference -->
+  <a class="rcard span-4" href="constitution/index.html">
+    <div class="rcard-category">Constitutional Law</div>
+    <div class="rcard-icon">📜</div>
+    <div class="rcard-title">Constitution Reference</div>
+    <div class="rcard-desc">Searchable, filterable reference — Articles &amp; Clauses in depth, plus a rapid dark-mode lookup tool. Tricolour parchment edition.</div>
+    <div class="rcard-tags">
+      <span class="rcard-tag">Articles</span>
+      <span class="rcard-tag">Clauses</span>
+      <span class="rcard-tag">Schedules</span>
+      <span class="rcard-tag">DPSP</span>
+    </div>
+    <div class="rcard-cta">Open</div>
+    <div class="rcard-ghost-num">2</div>
+  </a>
+
+  <!-- One-Liners -->
+  <a class="rcard span-4" href="oneliners/pu_law_oneliners.html">
+    <div class="rcard-category">Quick Revision</div>
+    <div class="rcard-icon">⚡</div>
+    <div class="rcard-title">50 Power One-Liners</div>
+    <div class="rcard-desc">High-yield facts for last-minute revision. Legal Aptitude, Constitution, Static GK &amp; Current Affairs — all highlighted for fast scanning.</div>
+    <div class="rcard-tags">
+      <span class="rcard-tag">20 Legal</span>
+      <span class="rcard-tag">10 Constitution</span>
+      <span class="rcard-tag">15 Static GK</span>
+      <span class="rcard-tag">5 Current Affairs</span>
+    </div>
+    <div class="rcard-cta">Open</div>
+    <div class="rcard-ghost-num">50</div>
+  </a>
+
+  <!-- Full one-liner booklet placeholder -->
+  <a class="rcard span-8 coming-soon" href="#">
+    <div class="coming-badge">Coming Soon</div>
+    <div class="rcard-category">Legal Current Affairs</div>
+    <div class="rcard-icon">📰</div>
+    <div class="rcard-title">Legal Current Affairs Booklet 2026</div>
+    <div class="rcard-desc">Comprehensive one-liner compendium of legal current affairs — landmark judgments, bills &amp; Acts, appointments &amp; international law events.</div>
+    <div class="rcard-ghost-num">∞</div>
+  </a>
+
+</div>
+
+<!-- SECTION: CLASS TESTS -->
+<div class="section-divider">
+  <span class="section-divider-label">Class Tests</span>
+</div>
+
+<div class="test-grid">
+
+  <a class="rcard span-4 coming-soon" href="#">
+    <div class="coming-badge">See Folder</div>
+    <div class="rcard-category">Class Test 1–3</div>
+    <div class="rcard-icon">📝</div>
+    <div class="rcard-title">Tests 1–3</div>
+    <div class="rcard-desc">Earlier class tests in the series — refer to the class test folder.</div>
+  </a>
+
+  <a class="rcard span-4" href="classtests/Class_Test_4_BSA_CurrentAffairs.html">
+    <div class="rcard-category">Class Test · 04</div>
+    <div class="rcard-icon">⚖️</div>
+    <div class="rcard-title">Class Test 4</div>
+    <div class="rcard-desc">BSA (Bharatiya Sakshya Adhiniyam) &amp; Current Affairs — combined MCQ paper.</div>
+    <div class="rcard-tags">
+      <span class="rcard-tag">BSA</span>
+      <span class="rcard-tag">Current Affairs</span>
+    </div>
+    <div class="rcard-cta">Open Test</div>
+    <div class="rcard-ghost-num">4</div>
+  </a>
+
+  <a class="rcard span-4" href="classtests/Class_Test_5_ContractAct.html">
+    <div class="rcard-category">Class Test · 05</div>
+    <div class="rcard-icon">📃</div>
+    <div class="rcard-title">Class Test 5</div>
+    <div class="rcard-desc">Indian Contract Act 1872 — MCQ paper covering essentials, offer, acceptance, consideration &amp; void contracts.</div>
+    <div class="rcard-tags">
+      <span class="rcard-tag">Contract Act</span>
+      <span class="rcard-tag">1872</span>
+    </div>
+    <div class="rcard-cta">Open Test</div>
+    <div class="rcard-ghost-num">5</div>
+  </a>
+
+</div>
+
+<!-- CREDIBILITY STRIP -->
+<div class="aashi-strip">
+  <div class="aashi-quote-mark">"</div>
+  <div class="aashi-content">
+    <div class="aashi-text">PLA's structured approach and quality study material made all the difference in my preparation. The one-liners and flash cards were invaluable for last-minute revision.</div>
+    <div class="aashi-attr">Aashi Gautam · AIR 2, PU BA.LLB 2025 · Pacific Law Academy</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-left">
+    Pacific Law Academy<br>
+    Sector 20, Panchkula, Haryana<br>
+    PU BA.LLB 2026 Entrance Prep
+  </div>
+  <div class="footer-center">Lex est Rex</div>
+  <div class="footer-right">
+    All materials compiled for<br>
+    educational purposes only.<br>
+    © 2026 Pacific Law Academy
+  </div>
+</footer>
+
+</body>
+</html>
